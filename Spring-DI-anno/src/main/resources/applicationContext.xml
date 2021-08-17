@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--声明组件扫描器：使用注解必须加入这个语句
+        component-scan:翻译过来是组件扫描器，组件是java对象。
+            属性： base-package 注解在你的项目中的包名。
+                  框架会扫描这个包和子包中的所有类，找类中的所有注解。
+                  遇到注解后，按照注解表示的功能，去创建对象， 给属性赋值。
+    -->
+    <context:component-scan base-package="com.example.example07"/>
+
+
+    <!--扫描多个包的三种方式-->
+    <!--
+        &lt;!&ndash;第一种，使用多次组件扫描器&ndash;&gt;
+        <context:component-scan base-package="com.example.example01"/>
+        <context:component-scan base-package="com.example.example02"/>
+
+        &lt;!&ndash;第二种，使用分隔符( ;或,)，指定多个包&ndash;&gt;
+        <context:component-scan base-package="com.example.example01;com.example.example02"/>
+
+        &lt;!&ndash;第三种：指定父包&ndash;&gt;
+        <context:component-scan base-package="com.example" />
+    -->
+
+
+    <!--读取外部的属性配置文件
+        property-placeholder:读取properties这样的文件
+    -->
+    <context:property-placeholder location="classpath:/config.properties" />
+
+    <!--
+        <bean id="mySchool" class="com.example.example03.School">
+             <property name="name" value="航空大学"/>
+             <property name="address" value="北京"/>
+        </bean>
+    -->
+</beans>

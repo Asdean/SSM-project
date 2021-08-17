@@ -16,6 +16,25 @@
 
     <modules>
         <module>MyBatis-project</module>
+        <module>MyBatisDemo2</module>
+        <module>MyBatis-proxy-dao</module>
+        <module>MyBatis-parameter</module>
+        <module>MyBatis-result</module>
+        <module>MyBatis-dynamic-sql</module>
+        <module>Spring-first</module>
+        <module>Spring-DI-xml</module>
+        <module>Spring-homework</module>
+        <module>Spring-DI-anno</module>
+        <module>Spring-aspectj-before</module>
+        <module>Spring-aspect-afterReturning</module>
+        <module>Spring-aspectj-Around</module>
+        <module>Spring-aspectj-AfterThrowing</module>
+        <module>Spring-aspectj-After</module>
+        <module>Spring-aspectj-Pointcut</module>
+        <module>Spring-aop-homework</module>
+        <module>Spring-MyBatis</module>
+        <module>Spring-trans-sale</module>
+        <module>Spring-trans-anno</module>
     </modules>
 
 </project>

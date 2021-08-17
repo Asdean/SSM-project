@@ -1,6 +1,6 @@
 package com.example.example01;
 
-import com.example.domain.Student;
+import com.example.example01.domain.Student;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -23,6 +23,15 @@ public class StudentDaoTest {
         // 3.创建SqlSessionFactory对象，使用SqlSessionFactoryBuilder类
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
 
+        /*
+        try(SqlSession session = factory.openSession()) {
+            String sqlId = "com.example.example01.dao.StudentDao" + "." + "selectStudentById";
+            Student student = session.selectOne(sqlId, 1001);
+        } finally {
+            session.close();
+        }
+        */
+
         // 4.获取SqlSession对象。
         SqlSession session = factory.openSession();
 
@@ -32,6 +41,7 @@ public class StudentDaoTest {
 
         // 6.通过SqlSession的方法，执行sql语句
         Student student = session.selectOne(sqlId, 1001);
+        System.out.println(student);
 
         // 7.关闭SqlSession对象
         session.close();
@@ -43,22 +53,27 @@ public class StudentDaoTest {
         InputStream inputStream  = Resources.getResourceAsStream(config);
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
 
-        SqlSession session = factory.openSession();
+        SqlSession session = factory.openSession(true);
 
         // 5.指定要执行的sql语句的 id
         // sql的id = namespace + "." + select|update|insert|delete标签的id属性值
-        String sqlId = "com.example.example01.dao.StudentDao" + "." + "insertStudent";
+        String sqlId = "com.example.example01.dao.StudentDao.insertStudent";
 
         // 6.通过SqlSession的方法，执行sql语句
-        Student student = new Student();
-        student.setId(1001);
+        Student student = Student.builder()
+                .id(1002)
+                .name("李四")
+                .email("lisi@email.com")
+                .age(22).build();
+        /*student.setId(1001);
         student.setName("张三");
         student.setEmail("lisi@email.com");
-        student.setAge(20);
+        student.setAge(20);*/
         int rows = session.insert(sqlId, student);
+        System.out.println(rows);
 
-        //mybatis默认执行sql语句是手工提交事务模式，在做insert，update，delete后需要提交事务。
-        session.commit();
+        // mybatis默认执行sql语句是 手工提交事务 模式，在做insert，update，delete后需要提交事务。
+        // session.commit();
 
         // 7.关闭SqlSession对象
         session.close();

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--声明bean-->
+    <!--
+        构造注入： Spring调用类的有参数构造方法，创建对象同时给属性赋值
+        语法：
+            <bean id="xxx" class="yyy">
+               <constructor-arg>: 表示一个构造方法的形参
+               标签有属性： name ：构造方法形参名
+                           index：构造方法的参数位置
+                           value：简单类型的形参值
+                           ref：  引用类型的形参值
+            </bean>
+    -->
+    <bean id="school" class="com.example.example03.School">
+        <property name="name" value="北京大学" />
+        <property name="address" value="北京" />
+    </bean>
+
+    <!--构造注入，使用name属性-->
+    <bean id="student" class="com.example.example03.Student">
+        <constructor-arg name="name" value="李四" />
+        <constructor-arg name="age" value="20" />
+
+        <constructor-arg name="school" ref="school" />
+    </bean>
+
+    <!--构造注入，使用index，参数的位置，构造方法参数从左往右位置是0,1,2-->
+    <bean id="student2" class="com.example.example03.Student">
+        <constructor-arg index="1" value="22" />
+        <constructor-arg index="0" value="张三" />
+
+        <constructor-arg index="2" ref="school" />
+    </bean>
+
+    <!--构造注入，省略index属性-->
+    <bean id="student3" class="com.example.example03.Student">
+        <constructor-arg value="王五" /> <!--index="0"-->
+        <constructor-arg value="23" /> <!--index="1"-->
+        <constructor-arg ref="school" /> <!--index="2"-->
+    </bean>
+
+    <!--构造注入，获取file对象-->
+    <!--构造注入，省略index属性-->
+    <bean id="file" class="java.io.File">
+        <constructor-arg name="parent" value="F:\jxc\log" />
+        <constructor-arg name="child" value="spring.log" />
+    </bean>
+</beans>

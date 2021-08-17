@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--声明bean-->
+    <!--
+        引用类型自动注入： spring根据byName,byType规则给引用类型赋值
+        1.byName（按名称注入）：
+         java类中引用类型的属性名称和spring容器中bean的id名称一样，
+         且数据类型一样的， 这样的bean能够赋值给引用类型。
+          语法：
+           <bean id="xxx" class="yy" autowire="byName">
+              简单类型属性赋值
+           </bean>
+    -->
+    <bean id="school" class="com.example.example04.School">
+        <property name="name" value="清华大学" />
+        <property name="address" value="北京" />
+    </bean>
+    <bean id="student" class="com.example.example04.Student" autowire="byName">
+        <property name="name" value="李四" />
+        <property name="age" value="20" />
+    </bean>
+</beans>

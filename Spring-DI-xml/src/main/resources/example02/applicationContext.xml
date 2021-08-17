@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--声明bean-->
+    <!--
+       DI:给属性赋值
+       简单类型: java中的基本数据类型和String
+       1.set注入：spring调用类的set方法，通过set方法完成属性赋值
+          简单类型的set注入：
+          语法：<bean id="xxx" class="yyy">
+                  <property name="属性名" value="简单类型属性值"/>
+                  ...
+               </bean>
+       2.set注入：
+          引用类型set注入：
+          语法：<bean id="xxx" class="yyy">
+                   <property name="属性名" ref="bean的id"/>
+                   ...
+               </bean>
+    -->
+    <bean id="school" class="com.example.example02.School">
+        <property name="name" value="北京大学" />
+        <property name="address" value="北京" />
+    </bean>
+    <bean id="student" class="com.example.example02.Student">
+        <!--只要有setter方法就行，spring不知道class中是否有name值的属性-->
+        <property name="name" value="李四" /> <!--调用语句setName("李四")-->
+        <property name="age" value="20" /> <!--调用语句setAge(20)-->
+
+        <property name="school" ref="school" />
+    </bean>
+</beans>

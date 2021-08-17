@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--声明数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/
+                springdb?&amp;useUnicode=true&amp;characterEncoding=utf-8
+                &amp;serverTimezone=Asia/Shanghai" />
+        <property name="username" value="root" />
+        <property name="password" value="333" />
+    </bean>
+
+    <!--声明SqlSessionFactoryBean, 在这个类中创建SqlSessionFactory对象-->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--指定数据源-->
+        <property name="dataSource" ref="dataSource" />
+        <!--
+            指定mybatis主配置文件
+            configLocation为Resource文件，可以直接使用value属性赋值
+        -->
+        <property name="configLocation" value="classpath:mybatis.xml" />
+    </bean>
+
+    <!--声明MapperScannerConfigurer-->
+    <!--
+        MapperScannerConfigurer的作用：
+            循环basePackage所表示的包，把包中的每个接口都找到，
+            调用SqlSession.getMapper把每个dao接口都创建出dao代理对象，
+            dao代理对象放在容器中。
+
+
+        ApplicationContext ctx = ...;
+        SqlSessionFactory sqlSessionFactory  = ctx.getBean("factory");
+        SqlSession session = sqlSessionFactory.openSession();
+        for (接口 : com.example.dao) {
+             接口 对象 = session.getMapper(接口);
+             springMap.put(接口名的首字母小写, 对象);
+        }
+    -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="factory" />
+        <property name="basePackage" value="com.example.dao" />
+    </bean>
+</beans>

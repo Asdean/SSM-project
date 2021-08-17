@@ -17,7 +17,8 @@
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <!--连接数据库的url-->
                 <property name="url" value="jdbc:mysql://localhost:3306/
-                springdb?&amp;serverTimezone=Asia/Shanghai"/>
+                springdb?&amp;useUnicode=true&amp;characterEncoding=utf-8
+                &amp;serverTimezone=Asia/Shanghai"/>
                 <!--用户名-->
                 <property name="username" value="root"/>
                 <!--密码-->

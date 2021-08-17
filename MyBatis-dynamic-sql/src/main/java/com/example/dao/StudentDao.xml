@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.StudentDao">
+    <!--定义代码片段-->
+    <sql id="selectStudent">
+        select * from student
+    </sql>
+
+    <!--if:
+        test: 使用对象的属性值作为条件
+    -->
+    <select id="selectIf" resultType="com.example.domain.Student">
+        <include refid="selectStudent" />
+
+        where id=-1 /*1=1*/
+        <if test="name != null and name != ''">
+            or name=#{name}
+        </if>
+        <if test="age > 0">
+            or age=#{age}
+        </if>
+    </select>
+
+    <!--使用if标签时，容易引起sql语句语法错误。使用where标签解决if产生的语法问题。
+
+        使用时 where, 里面是一个或多个 if 标签, 当有一个if标签判断条件为true,
+        where标签会转为 WHERE 关键字附加到sql语句的后面。
+        如果 if 没有一个条件为true, 忽略 where 和里面的 if 。
+        where标签删除 和他最近的 or 或者 and 。
+    -->
+    <select id="selectWhere" resultType="com.example.domain.Student">
+        select * from student
+        <where>
+            <if test="name != null and name != ''">
+                or name=#{name}
+            </if>
+            <if test="age > 0">
+                or age &gt; #{age}
+            </if>
+        </where>
+    </select>
+
+    <!--使用foreach可以循环数组, list集合, 一般使用在in语句中。-->
+    <!--foreach-1-->
+    <select id="selectForEach1" resultType="com.example.domain.Student">
+        select * from student
+        <if test="list !=null and list.size > 0">
+            where id in
+            <foreach collection="list" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </if>
+    </select>
+
+    <!--foreach-2-->
+    <select id="selectForEach2" resultType="com.example.domain.Student">
+        select * from student
+        <if test="list != null and list.size > 0">
+            where id in
+            <foreach collection="list" open="(" close=")" separator="," item="stu">
+                #{stu.id}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id="selectAllStudents" resultType="com.example.domain.Student">
+        select * from student order by id
+    </select>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--声明对象
+        id:自定义对象名称，唯一值。(可以没有，spring可以提供默认名称)
+        class：类的全限定名称，spring通过反射机制创建对象，不能是接口
+
+        spring根据id，class创建对象，把对象放入到spring的一个map对象。
+        map.put(id,对象)
+    -->
+    <bean id="someService" class="com.example.services.impl.SomeServiceImpl" />
+    <bean id="someService1" class="com.example.services.impl.SomeServiceImpl" />
+    <bean id="otherService" class="com.example.services.OtherService" />
+
+    <!--创建非自定义对象-->
+    <bean id="date" class="java.util.Date" />
+</beans>
