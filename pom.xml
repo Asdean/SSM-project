@@ -35,6 +35,21 @@
         <module>Spring-MyBatis</module>
         <module>Spring-trans-sale</module>
         <module>Spring-trans-anno</module>
+        <module>Spring-trans-aspectj-xml</module>
+        <module>Spring-web</module>
+        <module>SpringMVC</module>
+        <module>SpringMVC-RequestMapping</module>
+        <module>SpringMVC-receive-param</module>
+        <module>SpringMVC-return-result</module>
+        <module>SpringMVC-url-pattern</module>
+        <module>SpringMVC-SSM</module>
+        <module>SpringMVC-path</module>
+        <module>SpringMVC-forward-redirect</module>
+        <module>SpringMVC-exception-handler</module>
+        <module>SpringMVC-interceptor</module>
+        <module>SpringMVC-interceptor2</module>
+        <module>SpringMVC-permission-interceptor</module>
+        <module>SSM-Test</module>
     </modules>
 
 </project>
